@@ -45,23 +45,23 @@ def register(request):
     }
     return render(request, 'signup.html', context)
 
-def new_moment(request):
-    if request.method == 'POST':
-        form = CreateMomentForm(request.POST)
-        if form.is_valid():
-            new_moment = Moment
-            new_moment.moment_text = form.cleaned_data['moment_text']
-            new_moment.moment_created = form.cleaned_data['moment_created']
-            new_moment.moment_by = user
-            form.save()
-            return HttpResponseRedirect(reverse('mymoments'))
-    else:
-        form = CreateMomentForm()
+# def new_moment(request):
+#     if request.method == 'POST':
+#         form = CreateMomentForm(request.POST)
+#         if form.is_valid():
+#             new_moment = Moment
+#             new_moment.moment_text = form.cleaned_data['moment_text']
+#             new_moment.moment_created = form.cleaned_data['moment_created']
+#             new_moment.moment_by = user
+#             form.save()
+#             return HttpResponseRedirect(reverse('mymoments'))
+#     else:
+#         form = CreateMomentForm()
 
-    context = {
-        'form': form
-    }
-    return render(request, 'new_moment.html', context)
+#     context = {
+#         'form': form
+#     }
+#     return render(request, 'new_moment.html', context)
 
 # from mymoments.forms import UserForm # mymoments.forms?
 

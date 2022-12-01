@@ -23,24 +23,23 @@ from django.contrib.auth.forms import UserCreationForm
 
 
 # maybe use Forms here?
+# class CreateMomentForm(forms.Form):
+#     moment = Moment
+#     moment_text = forms.CharField(help_text="What's going on at this moment?")
+#     # moment_created = datetime.datetime.now()
+#     moment_created = forms.DateTimeField(initial=datetime.datetime.now(), disabled=True)
+#     moment_by = forms.ForeignKeyField
 
-class CreateMomentForm(forms.Form):
-    moment = Moment
-    moment_text = forms.CharField(help_text="What's going on at this moment?")
-    # moment_created = datetime.datetime.now()
-    moment_created = forms.DateTimeField(initial=datetime.datetime.now(), disabled=True)
-    moment_by = forms.ForeignKeyField
+#     def clean_moment_text(self): # does this need to be overridden?
+#         data = self.cleaned_data['moment_text']
+#         return data
 
-    def clean_moment_text(self): # does this need to be overridden?
-        data = self.cleaned_data['moment_text']
-        return data
+#     def clean_moment_created(self):
+#         data = self.cleaned_data['moment_created']
+#         return data
 
-    def clean_moment_created(self):
-        data = self.cleaned_data['moment_created']
-        return data
-
-    # def save(self, commit=True):
-    #     user = current_user
+#     # def save(self, commit=True):
+#     #     user = current_user
 
 
 
