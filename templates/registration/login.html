@@ -1,4 +1,41 @@
 {% extends "header.html" %}
 
 {% block content %}
+
+    {% if form.errors %}
+        <p>
+            This username and password combination is invalid.
+        </p>
+    {% endif %}
+
+    {% if next %}
+        {% if user.is_authenticated %}
+            <!-- restricted access -->
+            <p>
+                Your account lacks permission to access this page.
+            </p>
+        {% else %}
+            <!-- require login for access -->
+            <p>
+                Please login to view this page.
+            </p>
+        {% endif %}
+    {% endif %}
+
+    <!-- login form -->
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+
+        {{ form.username.label_tag }}
+        {{ form.username }}
+
+        {{ form.password.label_tag }}
+        {{ form.password }}
+        <a href="{% url 'password_reset' %}">Forgot my password</a>
+
+        <input type="submit" value="login">
+        <input type="hidden" name="next" value="{{ next }}">
+    </form>
+
+    <!-- to-do: lost password -->
 {% endblock %}

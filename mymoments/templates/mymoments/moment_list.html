@@ -1,0 +1,12 @@
+{% extends "header.html" %}
+
+{% block title %}
+    All Moments
+{% endblock %}
+
+{% block content %}
+    {% for moment in moment_list %}
+        {{ moment }} - {{ moment.moment_text }} - {{ moment.moment_by }}
+        <br><br>
+    {% endfor %}
+{% endblock %}

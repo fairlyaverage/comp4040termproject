@@ -132,3 +132,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Custom User Authentication; possibly move to another location
 AUTH_USER_MODEL = "mymoments.Momenteer"
+
+# Must modify login redirect url
+LOGIN_REDIRECT_URL = '/'
+
+# In lieu of actual e-mail server, for development
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
