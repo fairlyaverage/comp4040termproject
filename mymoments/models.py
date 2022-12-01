@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.contrib.auth.models import AbstractUser, User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.contrib.auth.models import User
 
 
 class Moment(models.Model):
@@ -12,11 +13,11 @@ class Moment(models.Model):
     moment_edited = models.DateTimeField(help_text='Moment last edited at', blank=True, null=True)
 
     # to-do: needs Fk field to User
-    moment_by = models.ForeignKey('Momenteer', on_delete=models.SET_NULL, null=True)
+    moment_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True) # first arg -> 'Momenteer'
 
     # Metadata
     class Meta:
-        ordering = ['moment_created'] # index Moments from most to least recent
+        ordering = ['-moment_created'] # index Moments from most to least recent
 
     def get_absolute_url(self):
         """ Returns a URL for a particular Moment """
@@ -27,28 +28,22 @@ class Moment(models.Model):
         # To-Do
         return str(self.moment_created)
 
+# OLD, BAD
 # class Momenteer(AbstractUser):
-class Momenteer(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    bio = models.TextField(max_length=500, blank=True)
-    location = models.CharField(max_length=30, blank=True)
-    birth_date = models.DateField(null=True, blank=True)
+# class Momenteer(models.Model):
+#     user = models.OneToOneField(User, on_delete=models.CASCADE)
+#     bio = models.TextField(max_length=500, blank=True)
+#     location = models.CharField(max_length=30, blank=True)
+#     birth_date = models.DateField(null=True, blank=True)
 
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        Momenteer.objects.create(user=instance)
+# @receiver(post_save, sender=User)
+# def create_user_profile(sender, instance, created, **kwargs):
+#     if created:
+#         Momenteer.objects.create(user=instance)
 
-@receiver(post_save, sender=User)
-def save_user_profile(sender, instance, **kwargs):
-    instance.profile.save()
-
-    """
-        USERNAME_FIELD
-        EMAIL_FIELD
-    """
-
-
+# @receiver(post_save, sender=User)
+# def save_user_profile(sender, instance, **kwargs):
+#     instance.profile.save()
 
     # def __str__(self):
     #     return self.username

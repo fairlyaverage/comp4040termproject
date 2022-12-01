@@ -7,5 +7,6 @@ urlpatterns = [
     path('mymoments/', views.MyMoments.as_view(), name='my_moments'),
     path('moment/<int:pk>', views.Moment.as_view(), name='moment'),
 
-    path('signup/', views.signup, name='signup'),
+    path('new_moment/', views.new_moment, name='new_moment'),
+    path('signup/', views.register, name='signup'),
 ]

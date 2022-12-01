@@ -131,7 +131,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Custom User Authentication; possibly move to another location
-AUTH_USER_MODEL = "mymoments.Momenteer"
+# AUTH_USER_MODEL = "mymoments.Momenteer"
 
 # Must modify login redirect url
 LOGIN_REDIRECT_URL = '/'
