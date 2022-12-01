@@ -1,0 +1,15 @@
+{% extends "header.html" %}
+
+{% block content %}
+    INSERT NEW MOMENT FORM HERE
+
+    <form action="" method="POST">
+        {% csrf_token %}
+
+        {{ form.moment_text }}
+        {{ form.moment_created }}
+        {{ form.moment_by.as_hiden }}
+
+        <input type="submit" value="Save My Moment">
+    </form>
+{% endblock %}

@@ -10,6 +10,11 @@
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
     </head>
     <body>
+        {% comment %} <div class="row">
+            {% if messages %}
+                {{ messages }}
+            {% endif %}
+        </div> {% endcomment %}
         <div class="row">
         <!-- header bar:
             Logo
@@ -32,7 +37,10 @@
             </div>
             <div class="col">
                 {% if user.is_authenticated %}
-                <div class="col">
+                <div class="row">
+                    Logged in as {{ user.username }}
+                </div>
+                <div class="row">
                     <a href="{% url 'logout' %}?next={{ request.path }}">Sign out</a>
                 </div>
                 {% else %}
