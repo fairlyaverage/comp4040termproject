@@ -11,32 +11,6 @@ def index(request):
 
     return render(request, 'index.html', context=context)
 
-def signup(request):
-    new_momenteer = Momenteer
-
-    if request.method == 'POST':
-        # user tried to submit form
-        form = UserCreationForm(request.POST)
-
-        if form.is_valid():
-            new_momenteer.username = form.cleaned_data['username']
-            new_momenteer.password = form.cleaned_data['password']
-            new_momenteer.email = form.cleaned_data['email']
-            new_momenteer.first_name = form.cleaned_data['first_name']
-            new_momenteer.last_name = form.cleaned_data['last_name']
-            new_momenteer.save()
-            return HttpResponseRedirect(reverse('all-moments'))
-    else:
-        # get request; initial form
-        form = UserCreationForm()
-
-    context = {
-        'form': form,
-        'new_momenteer': new_momenteer,
-    }
-
-    return render(request, 'signup.html', context)
-
 class AllMoments(generic.ListView):
     model = Moment
 
@@ -46,3 +20,53 @@ class MyMoments(generic.ListView):
 
 class Moment(generic.DetailView):
     model = Moment
+
+
+from django.contrib.auth.decorators import login_required
+# from django.contrib.auth.forms import UserCreationForm
+from .forms import SnippetForm, ContactForm, LoginForm
+
+def signup(request):
+
+    if request.user.is_authenticated:
+        return redirect('allmoments', username=request.user.username)
+
+    if request.method == 'POST':
+        f = UserCreationForm(request.POST)
+        if f.is_valid():
+            f.save()
+            messages.success(request, 'Account created successfully')
+            return redirect('signup')
+    else:
+        f = UserCreationForm()
+
+    return render(request, 'signup.html', {'form': f})
+
+
+
+# OLD, BAD
+# def signup(request):
+#     new_momenteer = Momenteer
+
+#     if request.method == 'POST':
+#         # user tried to submit form
+#         form = UserCreationForm(request.POST)
+
+#         if form.is_valid():
+#             new_momenteer.username = form.cleaned_data['username']
+#             new_momenteer.password = form.cleaned_data['password']
+#             new_momenteer.email = form.cleaned_data['email']
+#             new_momenteer.first_name = form.cleaned_data['first_name']
+#             new_momenteer.last_name = form.cleaned_data['last_name']
+#             new_momenteer.save()
+#             return HttpResponseRedirect(reverse('all-moments'))
+#     else:
+#         # get request; initial form
+#         form = UserCreationForm()
+
+#     context = {
+#         'form': form,
+#         'new_momenteer': new_momenteer,
+#     }
+
+#     return render(request, 'signup.html', context)
