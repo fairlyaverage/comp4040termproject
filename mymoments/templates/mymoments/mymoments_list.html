@@ -5,9 +5,34 @@
 {% endblock %}
 
 {% block content %}
-    {% for moment in moment_list %}
-        {{ moment.moment_text }} {{ moment.user }}
-
-
-    {% endfor %}
+cu {{ current_user }}
+u {{ user }}
+<table>
+        <thead>
+            <tr>
+                <th>Moment</th>
+                <th>Moment by</th>
+                <th>Moment created</th>
+                <th>Moment last edited</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for moment in moment_list %}
+                {% if moment.moment_by == user %}
+                <tr>
+                    <td></td>
+                    <td>{{ moment.moment_by }}</td>
+                    <td>{{ moment.moment_created }}</td>
+                    <td>{% if moment.moment_edited %}
+                        {{ moment.moment_edited }} {% endif %}</td>
+                </tr>
+                <tr>
+                    <td>
+                        {{ moment.moment_text }}
+                    </td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

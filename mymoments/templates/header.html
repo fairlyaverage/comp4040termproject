@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
     </head>
     <body>
+        <div class="container w-100">
         {% comment %} <div class="row">
             {% if messages %}
                 {{ messages }}
@@ -53,9 +54,25 @@
                 {% endif %}
             </div>
         </div>
-        <div class="container">
-            {% block content %}
-            {% endblock %}
+    </div>
+        <div class="d-grid container">
+            <div class="row">
+                <div class="col col-2">
+                    <div class="container">
+                        <div class="row">
+                            <!-- new moment -->
+                            <a href="{% url 'new_moment' %}">Create a new moment</a>
+                        </div>
+                        <div class="row">
+                            <!-- moment feed? -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-10">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </div>
         </div>
     </body>
 </html>
