@@ -22,7 +22,7 @@ class Moment(generic.DetailView):
     model = Moment
 
 from django.contrib.auth.forms import UserCreationForm
-from .forms import CustomUserCreationForm, CreateMomentForm
+from .forms import CustomUserCreationForm #, CreateMomentForm
 from django.contrib import messages
 
 def register(request):
