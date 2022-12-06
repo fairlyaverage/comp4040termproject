@@ -10,6 +10,11 @@ class CreateMomentForm(ModelForm):
         model = Moment
         fields = ['moment_text']
 
+class UpdateMomentForm(ModelForm):
+    class Meta:
+        model = Moment
+        fields = ['moment_text']
+
 class CustomUserCreationForm(UserCreationForm):
     username = forms.CharField()
     email = forms.EmailField()
