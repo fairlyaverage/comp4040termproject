@@ -6,7 +6,7 @@
 
 {% block content %}
     {% for moment in moment_list %}
-        {{ moment }} - {{ moment.moment_text }} - {{ moment.moment_by }}
+        {{ moment }} - {{ moment.moment_text }} - {{ moment.moment_by }} - {{ moment.moment_created }}
         <br><br>
     {% endfor %}
 {% endblock %}
