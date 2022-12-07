@@ -91,3 +91,42 @@ def update_moment(request, pk):
     context["form"] = form
 
     return render(request, "update_moment.html", context)
+
+@login_required
+def destroy_moment(request, pk):
+    template = "destroy_moment.html"
+    moment = get_object_or_404(Moment, id=pk)
+    if request.user != moment.moment_by:
+        messages.warning(request, "You do not have permission to delete this Moment")
+        return HttpResponseRedirect(reverse('all_moments'))
+
+    # maybe confirmation?
+
+    moment.delete()
+    messages.warning(request, "Moment Forgotten")
+    return HttpResponseRedirect(reverse('my_moments'))
+
+
+
+
+
+    # if request.user != moment.moment_by:
+    #     messages.warning(request, "You do not have permission to edit this Moment")
+    #     return HttpResponseRedirect(reverse('all_moments'))
+
+    # if request.method == 'DELETE':
+    #     return request.user.id == Moment.user.id
+
+
+    # form = UpdateMomentForm(request.DESTROY or None, instance = moment)
+
+    # if form.is_valid():
+    #     updated_moment = form.save(commit=False)
+    #     updated_moment.moment_edited = datetime.datetime.now()
+    #     form.save()
+    #     return HttpResponseRedirect(reverse('my_moments'))
+
+    # context = {}
+    # context["form"] = form
+
+    # return render(request, "update_moment.html", context)
