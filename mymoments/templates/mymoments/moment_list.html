@@ -5,8 +5,31 @@
 {% endblock %}
 
 {% block content %}
-    {% for moment in moment_list %}
-        #{{ moment.id }} : {{ moment }} - {{ moment.moment_text }} - {{ moment.moment_by }} - {{ moment.moment_created }}
-        <br><br>
-    {% endfor %}
+
+<table class="table table-striped"> <!-- temporary styling, testing bootstrap and display for debug -->
+    <thead class="table table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Moment</th>
+            <th>moment_text</th>
+            <th>moment_by</th>
+            <th>moment_created</th>
+            <th>moment_edited</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for moment in moment_list %}
+            <tr>
+                <td>{{ moment.id }}</td>
+                <td>{{ moment }}</td>
+                <td>{{ moment.moment_text }}</td>
+                <td>{{ moment.moment_by }}</td>
+                <td>{{ moment.moment_created }}</td>
+                <td>
+                    {% if moment.moment_edited != None %}
+                        {{ moment.moment_edited }}
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
 {% endblock %}
