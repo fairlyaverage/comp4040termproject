@@ -22,7 +22,7 @@
         </div>
         <div class="row" id="top-navbar">
             <div class="container">
-                <div class="row">
+                <div class="btn-group">
                     <div class="col">
                         <div class="container">
                             <a href="{% url 'my_moments' %}" hover-text="Return to My Moments">
@@ -31,29 +31,29 @@
                         </div>
                     </div>
                     <div class="col">
-                        <a href="{% url 'all_moments' %}">
+                        <a href="{% url 'all_moments' %}" class="btn btn-primary active" aria-current="page">
                             All Moments
                         </a>
                     </div>
                     <div class="col">
-                        <a href="{% url 'my_moments' %}">
+                        <a href="{% url 'my_moments' %}" class="btn btn-primary active">
                             My Moments
                         </a>
                     </div>
                     <div class="col">
                         {% if user.is_authenticated %}
                         <div class="row">
-                            Logged in as <a href="{% url 'my_moments' %}">{{ user.username }}</a>
+                            Logged in as <a href="{% url 'my_moments' %}" class="btn btn-primary active">{{ user.username }}</a>
                         </div>
                         <div class="row">
-                            <a href="{% url 'logout' %}?next={{ request.path }}">Sign out</a>
+                            <a href="{% url 'logout' %}?next={{ request.path }}" class="btn btn-primary active">Sign out</a>
                         </div>
                         {% else %}
                         <div class="row">
-                            <a href="{% url 'login' %}?next={{ request.path }}">Log in</a>
+                            <a href="{% url 'login' %}?next={{ request.path }}" class="btn btn-primary active">Log in</a>
                         </div>
                         <div class="row">
-                            <a href="{% url 'signup' %}">Sign up</a>
+                            <a href="{% url 'signup' %}" class="btn btn-primary active">Sign up</a>
                         </div>
                         {% endif %}
                     </div>
@@ -61,6 +61,7 @@
             </div>
         </div>
         <div class="row mx-auto">
+            {% if user.is_authenticated %}
             <div class="col col-2 p-3" id="side-navbar">
                 <div class="container">
                     <div class="row">
@@ -76,6 +77,7 @@
                     </div>
                 </div>
             </div>
+            {% endif %}
             <div class="col fill mx-auto" id="page-content">
                 {% block content %}
                 {% endblock %}

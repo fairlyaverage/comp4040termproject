@@ -10,13 +10,19 @@ from django.contrib import messages
 
 
 def index(request):
+    moment_list = Moment.objects.all
+    # context = {} # empty placeholder
+    today = datetime.datetime.now
+    context = {
+        'today': today,
+        'moment_list': moment_list,
+    }
+    return render(request, 'mymoments/moment_list.html', context=context)
 
-    context = {} # empty placeholder
-
-    return render(request, 'index.html', context=context)
 
 class AllMoments(generic.ListView):
     model = Moment
+
 
 class MyMoments(generic.ListView):
     model = Moment

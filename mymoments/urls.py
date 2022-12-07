@@ -2,8 +2,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.AllMoments.as_view(), name='index'), # show all moments as root
-    path('moments/', views.AllMoments.as_view(), name='all_moments'),
+    path('', views.index, name='index'), # show all moments as root
+    path('moments/', views.index, name='all_moments'),
     path('mymoments/', views.MyMoments.as_view(), name='my_moments'),
     path('moment/<int:pk>', views.moment, name='moment'),
 

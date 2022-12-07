@@ -5,10 +5,26 @@
 
 {{ form.non_field_errors }}
 {{ form.errors }}
-    <form method="post" action="">
-        {% csrf_token %}
 
-        {{ form.as_p }}
-        <input type="submit" name="submit" value="Become a Momenteer">
-    </form>
+<div class="container d-flex vh-100 w-50 align-items-center justify-content-center">
+    <div class="col">
+
+    <table class="table table-borderless">
+        <form method="post" action="" class="row g-3 form-control">
+            {% csrf_token %}
+            {{ form.as_table }}
+            <tr>
+                <td></td>
+                <td >
+                    <input type="submit" name="submit" value="Become a Momenteer" class="btn btn-primary btn-rounded">
+                </td>
+                <td></td>
+            </tr>
+        </form>
+    </table>
+    </div>
+    <div class="col"></div>
+</div>
+
+
 {% endblock %}
