@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'mymoments.apps.MymomentsConfig',
+    'django_summernote',
 ]
 
 MIDDLEWARE = [
@@ -141,3 +142,6 @@ LOGIN_REDIRECT_URL = '/'
 
 # In lieu of actual e-mail server, for development
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')

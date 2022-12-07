@@ -12,30 +12,30 @@
         {% if user.is_authenticated %}
             <!-- restricted access -->
             <p>
-                Your account lacks permission to access this page.
-            </p>
-        {% else %}
-            <!-- require login for access -->
-            <p>
-                Please login to view this page.
+                You are already authenticated.
             </p>
         {% endif %}
     {% endif %}
 
     <!-- login form -->
-    <form method="post" action="{% url 'login' %}">
-        {% csrf_token %}
-
-        {{ form.username.label_tag }}
-        {{ form.username }}
-
-        {{ form.password.label_tag }}
-        {{ form.password }}
-        <a href="{% url 'password_reset' %}">Forgot my password</a>
-
-        <input type="submit" value="login">
-        <input type="hidden" name="next" value="{{ next }}">
-    </form>
-
-    <!-- to-do: lost password -->
+    <div class="col-md-4 mx-auto">
+        <div class="card text-center border-primary" >
+            <div class="card-header">
+                User Login
+            </div>
+            <div class="card-body">
+                <p class="card-text">
+                    <form method="post" action="{% url 'login' %}">
+                        {% csrf_token %}
+                        {{ form.as_p}}
+                        <p>
+                            <a href="{% url 'password_reset' %}">Forgot my password</a>
+                        </p>
+                        <input type="submit" value="login" class="btn btn-primary">
+                        <input type="hidden" name="next" value="{{ next }}">
+                    </form>
+                </p>
+            </div>
+        </div>
+    </div>
 {% endblock %}

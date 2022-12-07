@@ -1,14 +1,34 @@
 {% extends "header.html" %}
 
 {% block content %}
-
-
-{{ form.non_field_errors }}
-{{ form.errors }}
-    <form method="post" action="">
-        {% csrf_token %}
-
-        {{ form.as_p }}
-        <input type="submit" name="submit" value="Become a Momenteer">
-    </form>
+    <!-- login form -->
+    <div class="col-md-4 mx-auto">
+        <div class="card text-center border-primary" >
+            <div class="card-header">
+                <p>
+                    {% if form.errors %}
+                        This username and password combination is invalid.
+                    {% else %}
+                        Register New User
+                    {% endif %}
+                </p>
+                {% if next %}
+                    {% if user.is_authenticated %}
+                        <!-- restricted access -->
+                            You are already authenticated.
+                    {% endif %}
+                {% endif %}
+            </div>
+            <div class="card-body">
+                <p>
+                    <form method="post" action="{% url 'signup' %}" class="align-items-center">
+                        {% csrf_token %}
+                        {{ form.as_p}}
+                        <input type="submit" class="btn btn-primary">
+                        <input type="hidden" name="next" value="{{ next }}">
+                    </form>
+                </p>
+            </div>
+        </div>
+    </div>
 {% endblock %}
