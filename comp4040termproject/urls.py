@@ -24,4 +24,8 @@ urlpatterns = [
     path('mymoments/', include('mymoments.urls')),
     path('', RedirectView.as_view(url='mymoments/', permanent=True)),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('summernote/', include('django_summernote.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

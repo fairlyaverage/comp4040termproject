@@ -6,7 +6,6 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.contrib.auth.models import User
 
-
 class Moment(models.Model):
     moment_text = models.TextField(help_text='Text body for a Moment')
     moment_created = models.DateTimeField(auto_now_add=True, help_text='Moment created at')

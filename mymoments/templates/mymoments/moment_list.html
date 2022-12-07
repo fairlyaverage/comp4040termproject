@@ -22,7 +22,7 @@
             <tr>
                 <td>{{ moment.id }}</td>
                 <td>{{ moment }}</td>
-                <td>{{ moment.moment_text }}</td>
+                <td>{{ moment.moment_text|safe }}</td>
                 <td>{{ moment.moment_by }}</td>
                 <td>{{ moment.moment_created }}</td>
                 <td>

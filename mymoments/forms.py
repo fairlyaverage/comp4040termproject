@@ -4,12 +4,18 @@ from django.contrib.auth.models import User # get the base User working before a
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import ModelForm
 from django.core.exceptions import ValidationError
+from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
+from django_summernote.fields import SummernoteTextFormField, SummernoteTextField
 
 class CreateMomentForm(ModelForm):
-    # moment_text - forms.CharField(widget=forms.Textarea)
+
     class Meta:
         model = Moment
+        # model.moment_text - SummernoteTextField()
         fields = ['moment_text']
+        widgets = {
+            'moment_text': SummernoteWidget(),
+        }
 
 class UpdateMomentForm(ModelForm):
     class Meta:
