@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-
+<div class="col col-6 mx-auto">
 <div class="list-group">
     {% for moment in moment_list %}
     {{ moment_list.count }}{{ moment.id }}
@@ -49,4 +49,5 @@
                 </td>
             </tr>
         {% endfor %}
+</div>
 {% endblock %}

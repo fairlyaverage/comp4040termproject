@@ -5,51 +5,29 @@
 {% endblock %}
 
 {% block content %}
+<div class="col-9 mx-auto">
 <div class="list-group">
     {% if moment_list.first.moment_created != today %}LESS THAN TODAY{% endif%}
 
     {% for moment in moment_list %}
-    {% if moment.id == moment_list.first.id %}F I R S T{% endif %}
-        {% if moment.id == moment_list.count %}
-            <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+        {% if moment.id == moment_list.first.id %}
+            <a href="{% url 'moment' moment.id %}" class="list-group-item list-group-item-action" aria-current="true">
         {% else %}
-            <a href="#" class="list-group-item list-group-item-action">
+            <a href="{% url 'moment' moment.id %}" class="list-group-item list-group-item-action">
         {% endif %}
             <div class="d-flex w-100 justify-content-between">
                 <h5 class="mb-1">@{{ moment.moment_by }}</h5>
-                <small>{{ today }}</small>
+                <small>{{ moment.moment_created }}</small>
             </div>
             <div class="mx-auto">
-            <p class="mb-1">{{ moment.moment_text|safe }}</p></div>
-            <small><a href="{{ moment.moment_by.email }}">e-mail {{ moment.moment_by }}</a></small>
-        </a>
+                <p class="mb-1">{{ moment.moment_text|safe }}</p>
+            </div>
+            <div class="d-flex w-100 justify-content-between">
+                <div></div>
+                <small>{% if moment.moment_edited %}<i>edited {{ moment.moment_edited }}</i>{% endif %}</small>
+            </div>
 
+        </a>
+        <br>
     {% endfor %}
-</div>
-<table class="table table-striped"> <!-- temporary styling, testing bootstrap and display for debug -->
-    <thead class="table table-dark">
-        <tr>
-            <th>ID</th>
-            <th>Moment</th>
-            <th>moment_text</th>
-            <th>moment_by</th>
-            <th>moment_created</th>
-            <th>moment_edited</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for moment in moment_list %}
-            <tr>
-                <td>{{ moment.id }}</td>
-                <td>{{ moment }}</td>
-                <td>{{ moment.moment_text|safe }}</td>
-                <td>{{ moment.moment_by }}</td>
-                <td>{{ moment.moment_created }}</td>
-                <td>
-                    {% if moment.moment_edited != None %}
-                        {{ moment.moment_edited }}
-                    {% endif %}
-                </td>
-            </tr>
-        {% endfor %}
 {% endblock %}

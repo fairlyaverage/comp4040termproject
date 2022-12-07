@@ -19,10 +19,8 @@ def index(request):
     }
     return render(request, 'mymoments/moment_list.html', context=context)
 
-
 class AllMoments(generic.ListView):
     model = Moment
-
 
 class MyMoments(generic.ListView):
     model = Moment
@@ -44,8 +42,8 @@ def register(request):
             # new_user.set_password(form.cleaned_data.get('password'))
             # new_user.save()
             form.save()
+            messages.success(request, "We hope you stick around for a Moment")
             return HttpResponseRedirect(reverse('login'))
-        messages.success(request, 'Account created')
     else:
         form = CustomUserCreationForm()
     context = {
@@ -112,8 +110,9 @@ def destroy_moment(request, pk):
     messages.warning(request, "Moment Forgotten")
     return HttpResponseRedirect(reverse('my_moments'))
 
-
-
+from django.contrib.auth.mixins import LoginRequiredMixin
+def modal_form(request):
+    template = "modal_block.html"
 
 
     # if request.user != moment.moment_by:
