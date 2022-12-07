@@ -6,6 +6,7 @@ from django.forms import ModelForm
 from django.core.exceptions import ValidationError
 
 class CreateMomentForm(ModelForm):
+    # moment_text - forms.CharField(widget=forms.Textarea)
     class Meta:
         model = Moment
         fields = ['moment_text']
