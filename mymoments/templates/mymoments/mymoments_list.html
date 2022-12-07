@@ -5,42 +5,31 @@
 {% endblock %}
 
 {% block content %}
-<table class="fill">
-        <thead>
-            <tr>
-                <th>Moment</th>
-                <th>Moment by</th>
-                <th>Moment created</th>
-                <th>Moment last edited</th>
-                <th><!-- edit --></th>
-            </tr>
-        </thead>
-        <tbody>
+
+    <div class="col-9 mx-auto">
+        <div class="list-group">
             {% for moment in moment_list %}
                 {% if moment.moment_by == user %}
-                <tr>
-                    <td></td>
-                    <td>{{ moment.moment_by }}</td>
-                    <td>{{ moment.moment_created }}</td>
-                    <td>
-                        {% if moment.moment_edited %}
-                            {{ moment.moment_edited }}
-                        {% endif %}
-                    </td>
-                    <td>
-                        <a href="{% url 'update_moment' moment.id %}" class="btn btn-primary btn-sm">Edit</a>
-                    </td>
-                    <td>
-                        <a href="{% url 'destroy_moment' moment.id %}" class="btn btn-primary btn-sm">Delete</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        {{ moment.moment_text }}
-                    </td>
-                </tr>
+                    <a href="{% url 'moment' moment.id %}" class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">@{{ moment.moment_by }}</h5>
+                            <small>{{ moment.moment_created }} {% if moment.moment_edited %} | <i>edited {{ moment.moment_edited }} </i>{% endif %}</small>
+                        </div>
+                        <div class="mx-auto">
+                            <p class="mb-1">{{ moment.moment_text|safe }}</p>
+                        </div>
+                        </a>
+                        <div class="row justify-content-right">
+                            <div class="col"></div>
+                            <div class="col btn-group justify-content-right col-md-2 offset-md-2" role="group" aria-label="Basic example">
+
+                                <a href="{% url 'update_moment' moment.id %}" class="btn btn-secondary btn-sm" style="max-width: 100px;">Edit</a>
+                                <a href="{% url 'destroy_moment' moment.id %}" class="btn btn-secondary btn-sm" style="max-width: 100px;">Delete</a>
+                            </div>
+                        </div>
+                        <br>
                 {% endif %}
             {% endfor %}
-        </tbody>
-    </table>
+        </div>
+    </div>
 {% endblock %}

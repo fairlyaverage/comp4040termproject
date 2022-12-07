@@ -5,6 +5,26 @@
 {% endblock %}
 
 {% block content %}
-    {{ moment.pk }}
-    <a href="{% url 'update_moment' moment.id %}">Edit Moment</a>
+<div class="col-9 mx-auto col-md-5 offset-md-5">
+    <div class="list-group">
+        <a href="{% url 'moment' moment.id %}" class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">@{{ moment.moment_by }}</h5>
+                    <small>{{ moment.moment_created }} {% if moment.moment_edited %} | <i>edited {{ moment.moment_edited }} </i>{% endif %}</small>
+                </div>
+                <div class="mx-auto">
+                    <p class="mb-1">{{ moment.moment_text|safe }}</p>
+                </div>
+                </a>
+                {% if moment.moment_by == user %}
+                <div class="row justify-content-right">
+                    <div class="col"></div>
+                    <div class="col btn-group justify-content-right col-md-2 offset-md-2" role="group" aria-label="Basic example">
+                        <a href="{% url 'update_moment' moment.id %}" class="btn btn-secondary btn-sm" style="max-width: 100px;">Edit</a>
+                        <a href="{% url 'destroy_moment' moment.id %}" class="btn btn-secondary btn-sm" style="max-width: 100px;">Delete</a>
+                    </div>
+                </div>
+            {% endif %}
+    </div>
+</div>
 {% endblock %}

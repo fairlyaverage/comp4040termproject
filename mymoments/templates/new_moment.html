@@ -1,15 +1,21 @@
 {% extends "header.html" %}
 
 {% block content %}
-    INSERT NEW MOMENT FORM HERE
-
-    <form action="" method="POST">
-        {% csrf_token %}
-
-        {{ form.moment_text }}
-        {{ form.moment_created }}
-        {{ form.moment_by.as_hiden }}
-
-        <input type="submit" value="Save My Moment">
-    </form>
+    <div class="col mx-auto" style="max-width: 750px;">
+        <div class="card text-center border-primary" >
+            <div class="card-header">
+                Think for a Moment
+            </div>
+            <div class="card-body">
+                <p class="card-text">
+                    <form method="post" action="">
+                        {% csrf_token %}
+                        {{ form.moment_text }}
+                        <input type="submit" value="Record New Moment" class="btn btn-primary">
+                        <input type="hidden" name="next" value="{{ next }}">
+                    </form>
+                </p>
+            </div>
+        </div>
+    </div>
 {% endblock %}

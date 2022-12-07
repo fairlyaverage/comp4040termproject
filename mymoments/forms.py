@@ -21,6 +21,9 @@ class UpdateMomentForm(ModelForm):
     class Meta:
         model = Moment
         fields = ['moment_text']
+        widgets = {
+            'moment_text': SummernoteWidget(),
+        }
 
 class CustomUserCreationForm(UserCreationForm):
 

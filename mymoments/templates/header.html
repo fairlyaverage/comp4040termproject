@@ -20,13 +20,26 @@
                 {% endfor %}
             {% endif %}
         </div>
-        <div class="row" id="top-navbar">
+        <div class="row d-flex" id="top-navbar">
             <div class="col">
                 <a href="{% url 'my_moments' %}" hover-text="Return to My Moments">
                     <img src="{% static 'images/mymoments-01.png' %}" class="img" style="min-width: 450px; max-width: 75%; min-height: 126px; max-height: 75%;">
                 </a>
             </div>
+            <div class="col container" style="max-height: 50px;">
+            <div class="btn-group offset-md-5">
+                <a href="{% url 'all_moments' %}" class="btn btn-secondary" aria-current="page" style="max-width: 128px;">
+                    All Moments
+                </a>
+                <a href="{% url 'my_moments' %}" class="btn btn-secondary" style="max-width: 128px;">
+                    My Moments
+                </a>
+                <a href="{% url 'new_moment' %}" class="btn btn-secondary" style="max-width: 128px;">Record New Moment</a>
+            </div>
             <div class="col">
+            </div>
+        </div>
+            {% comment %} <div class="col">
                 <a href="{% url 'all_moments' %}" class="btn btn-primary" aria-current="page">
                     All Moments
                 </a>
@@ -37,17 +50,19 @@
                 </a>
             </div>
             <div class="col">
-                <a href="{% url 'new_moment' %}" class="btn btn-primary">Record a New Moment</a>
-            </div>
-            <div class="col">
+                <a href="{% url 'new_moment' %}" class="btn btn-primary">Record New Moment</a>
+            </div> {% endcomment %}
+            <div class="col" style="max-width: 200px;">
                 {% if user.is_authenticated %}
                 <div class="row">
                     <div class="col">
-                    Logged in as @<a href="{% url 'my_moments' %}">{{ user.username }}</a>
-                    </div
+                        Logged in as @<a href="{% url 'my_moments' %}?next={{ request.path }}">{{ user.username }}</a>
+                    </div>
                 </div>
                 <div class="row">
+                    <div class="col">
                     <a href="{% url 'logout' %}?next={{ request.path }}" class="btn btn-primary active">Sign out</a>
+                    </div>
                 </div>
                 {% else %}
                 <div class="row">
@@ -67,24 +82,3 @@
         </div>
     </body>
 </html>
-            {% comment %} {% if user.is_authenticated %}
-            <div class="col col-2 p-3" id="side-navbar">
-                <div class="container">
-                    <div class="row">
-                        <div class="col mx-auto">
-                            <!-- new moment -->
-                            <a href="{% url 'new_moment' %}" class="btn btn-secondary btn-lg">
-                                Create a new moment
-                            </a>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <!-- moment feed? -->
-                    </div>
-                </div>
-            </div>
-            {% endif %}
-            <div class="col fill mx-auto" id="page-content">
-                {% block content %}
-                {% endblock %}
-            </div> {% endcomment %}

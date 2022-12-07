@@ -7,8 +7,9 @@ from django.contrib.auth.decorators import login_required
 import datetime
 from .forms import CustomUserCreationForm, CreateMomentForm, UpdateMomentForm
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 
-
+@login_required
 def index(request):
     moment_list = Moment.objects.all
     # context = {} # empty placeholder
@@ -19,10 +20,11 @@ def index(request):
     }
     return render(request, 'mymoments/moment_list.html', context=context)
 
-class AllMoments(generic.ListView):
+class AllMoments(LoginRequiredMixin, generic.ListView):
+
     model = Moment
 
-class MyMoments(generic.ListView):
+class MyMoments(LoginRequiredMixin, generic.ListView):
     model = Moment
     template_name = 'mymoments/mymoments_list.html'
 
@@ -109,29 +111,3 @@ def destroy_moment(request, pk):
     moment.delete()
     messages.warning(request, "Moment Forgotten")
     return HttpResponseRedirect(reverse('my_moments'))
-
-from django.contrib.auth.mixins import LoginRequiredMixin
-def modal_form(request):
-    template = "modal_block.html"
-
-
-    # if request.user != moment.moment_by:
-    #     messages.warning(request, "You do not have permission to edit this Moment")
-    #     return HttpResponseRedirect(reverse('all_moments'))
-
-    # if request.method == 'DELETE':
-    #     return request.user.id == Moment.user.id
-
-
-    # form = UpdateMomentForm(request.DESTROY or None, instance = moment)
-
-    # if form.is_valid():
-    #     updated_moment = form.save(commit=False)
-    #     updated_moment.moment_edited = datetime.datetime.now()
-    #     form.save()
-    #     return HttpResponseRedirect(reverse('my_moments'))
-
-    # context = {}
-    # context["form"] = form
-
-    # return render(request, "update_moment.html", context)

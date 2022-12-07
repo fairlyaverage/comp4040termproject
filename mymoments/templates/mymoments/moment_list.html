@@ -5,29 +5,28 @@
 {% endblock %}
 
 {% block content %}
-<div class="col-9 mx-auto">
-<div class="list-group">
-    {% if moment_list.first.moment_created != today %}LESS THAN TODAY{% endif%}
-
-    {% for moment in moment_list %}
-        {% if moment.id == moment_list.first.id %}
-            <a href="{% url 'moment' moment.id %}" class="list-group-item list-group-item-action" aria-current="true">
-        {% else %}
-            <a href="{% url 'moment' moment.id %}" class="list-group-item list-group-item-action">
-        {% endif %}
-            <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">@{{ moment.moment_by }}</h5>
-                <small>{{ moment.moment_created }}</small>
-            </div>
-            <div class="mx-auto">
-                <p class="mb-1">{{ moment.moment_text|safe }}</p>
-            </div>
-            <div class="d-flex w-100 justify-content-between">
-                <div></div>
-                <small>{% if moment.moment_edited %}<i>edited {{ moment.moment_edited }}</i>{% endif %}</small>
-            </div>
-
-        </a>
-        <br>
-    {% endfor %}
+    <div class="col-9 mx-auto">
+        <div class="list-group">
+            {% for moment in moment_list %}
+                {% if moment.id == moment_list.first.id %}
+                    <a href="{% url 'moment' moment.id %}" class="list-group-item list-group-item-action" aria-current="true">
+                {% else %}
+                    <a href="{% url 'moment' moment.id %}" class="list-group-item list-group-item-action">
+                {% endif %}
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">@{{ moment.moment_by }}</h5>
+                        <small>{{ moment.moment_created }}</small>
+                    </div>
+                    <div class="mx-auto">
+                        <p class="mb-1">{{ moment.moment_text|safe }}</p>
+                    </div>
+                    <div class="d-flex w-100 justify-content-between">
+                        <div></div>
+                        <small>{% if moment.moment_edited %}<i>edited {{ moment.moment_edited }}</i>{% endif %}</small>
+                    </div>
+                </a>
+                <br>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}
